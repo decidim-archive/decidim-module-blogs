@@ -1,0 +1,53 @@
+<div class="card">
+  <div class="card-divider">
+    <h2 class="card-title">
+      <%= t(".title") %>
+      <%= link_to t("actions.new", scope: "decidim.blogs", name: t("models.blog.name", scope: "decidim.blogs.admin")), new_blog_path, class: 'button tiny button--title' if can? :manage, current_feature %>
+    </h2>
+  </div>
+
+  <div class="card-section">
+    <div class="table-scroll">
+      <table class="table-list">
+        <thead>
+          <tr>
+            <th><%= t("models.blog.fields.title", scope: "decidim.blogs") %></th>
+            <th><%= t("models.blog.fields.body", scope: "decidim.blogs") %></th>
+            <th><%= t("models.blog.fields.commentable", scope: "decidim.blogs") %></th>
+
+            <th class="actions"><%= t("actions.title", scope: "decidim.blogs") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% blogs.each do |blog| %>
+
+            <tr data-id="<%= blog.id %>">
+              <td>
+                <%= translated_attribute(blog.title) %><br />
+              </td>
+              <td>
+                <%= translated_attribute(blog.body) %><br />
+              </td>
+              <td>
+                <%= humanize_boolean blog.commentable? %>
+              </td>
+
+              <td class="table-list__actions">
+                <%= icon_link_to "eye", resource_locator(blog).path, t("actions.preview", scope: "decidim.meetings"), class: "action-icon--preview", target: :blank %>
+
+                <% if can? :update, current_feature %>
+                  <%= icon_link_to "pencil", edit_blog_path(blog), t("actions.edit", scope: "decidim.blogs"), class: "action-icon--edit" %>
+                <% end %>
+
+                <% if can? :destroy, current_feature %>
+                  <%= icon_link_to "circle-x", blog_path(blog), t("actions.destroy", scope: "decidim.blogs"), method: :delete, class: "action-icon--remove", data: { confirm: t("actions.confirm_destroy", scope: "decidim.blogs") } %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate blogs, theme: "decidim" %>
+    </div>
+  </div>
+<div>

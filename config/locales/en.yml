@@ -1,0 +1,53 @@
+---
+en:
+  decidim:
+    blogs:
+      actions:
+        confirm_destroy: Are you sure you want to delete this blog?
+        destroy: Delete
+        edit: Edit
+        new: New
+        title: Actions
+      admin:
+        models:
+          blog:
+            name: Blog
+          components:
+            body: Body
+            title: Title
+        blogs:
+          create:
+            invalid: There's been a problem creating this blog
+            success: Blog successfully created
+          destroy:
+            success: Blog successfully deleted
+          edit:
+            save: Update
+            title: Edit Blog
+          index:
+            title: Blogs
+          new:
+            create: Create
+            title: Create blog
+          update:
+            invalid: There's been errors when saving the blog.
+            success: Blog saved successfully
+      models:
+        blog:
+          fields:
+            body: Body
+            commentable: Commentable
+            title: title
+      read_more: Read more
+    features:
+      blogs:
+        actions:
+          join: Join
+        name: Blogs
+        settings:
+          global:
+            announcement: Announcement
+            comments_enabled: Comments Enabled
+          step:
+            announcement: Announcement
+            comments_blocked: Comments Blocked
