@@ -9,7 +9,6 @@ module Decidim
     # override its layout and provide all kinds of useful methods.
     class ApplicationController < Decidim::Features::BaseController
       helper Decidim::Blogs::ApplicationHelper
-      
     end
   end
 end

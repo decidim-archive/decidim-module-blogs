@@ -5,7 +5,6 @@ module Decidim
     module Admin
       # This controller allows the create or update a blog.
       class BlogsController < Admin::ApplicationController
-
         def new
           @form = form(BlogForm).instance
         end

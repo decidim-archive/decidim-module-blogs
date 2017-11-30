@@ -7,14 +7,9 @@ en:
         destroy: Delete
         edit: Edit
         new: New
+        preview: Preview
         title: Actions
       admin:
-        models:
-          blog:
-            name: Blog
-          components:
-            body: Body
-            title: Title
         blogs:
           create:
             invalid: There's been a problem creating this blog
@@ -23,7 +18,6 @@ en:
             success: Blog successfully deleted
           edit:
             save: Update
-            title: Edit Blog
           index:
             title: Blogs
           new:
@@ -32,11 +26,15 @@ en:
           update:
             invalid: There's been errors when saving the blog.
             success: Blog saved successfully
+        models:
+          blog:
+            name: Blog
+          components:
+            body: Body
       models:
         blog:
           fields:
             body: Body
-            commentable: Commentable
             title: title
       read_more: Read more
     features:
@@ -51,3 +49,7 @@ en:
           step:
             announcement: Announcement
             comments_blocked: Comments Blocked
+  pages:
+    home:
+      statistics:
+        blogs_count: Blogs

@@ -2,18 +2,18 @@
 
 module Decidim
   module Blogs
-    # Custom helpers used in meetings views
+    # Custom helpers used in blogs views
     module BlogsHelper
       include Decidim::ApplicationHelper
       include Decidim::TranslationsHelper
       include Decidim::ResourceHelper
 
-      # Public: truncates the meeting description
+      # Public: truncates the blog body
       #
-      # meeting - a Decidim::Meeting instance
-      # max_length - a number to limit the length of the description
+      # blog - a Decidim::Blog instance
+      # max_length - a number to limit the length of the body
       #
-      # Returns the meeting's description truncated.
+      # Returns the blog's body truncated.
       def blog_description(blog, max_length = 120)
         link = resource_locator(blog).path
         body = translated_attribute(blog.body)

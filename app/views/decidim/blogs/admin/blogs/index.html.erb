@@ -13,7 +13,6 @@
           <tr>
             <th><%= t("models.blog.fields.title", scope: "decidim.blogs") %></th>
             <th><%= t("models.blog.fields.body", scope: "decidim.blogs") %></th>
-            <th><%= t("models.blog.fields.commentable", scope: "decidim.blogs") %></th>
 
             <th class="actions"><%= t("actions.title", scope: "decidim.blogs") %></th>
           </tr>
@@ -26,14 +25,11 @@
                 <%= translated_attribute(blog.title) %><br />
               </td>
               <td>
-                <%= translated_attribute(blog.body) %><br />
-              </td>
-              <td>
-                <%= humanize_boolean blog.commentable? %>
+                <%= truncate(html_escape(translated_attribute(blog.body).html_safe), length: 100).html_safe %><br />
               </td>
 
               <td class="table-list__actions">
-                <%= icon_link_to "eye", resource_locator(blog).path, t("actions.preview", scope: "decidim.meetings"), class: "action-icon--preview", target: :blank %>
+                <%= icon_link_to "eye", resource_locator(blog).path, t("actions.preview", scope: "decidim.blogs"), class: "action-icon--preview", target: :blank %>
 
                 <% if can? :update, current_feature %>
                   <%= icon_link_to "pencil", edit_blog_path(blog), t("actions.edit", scope: "decidim.blogs"), class: "action-icon--edit" %>

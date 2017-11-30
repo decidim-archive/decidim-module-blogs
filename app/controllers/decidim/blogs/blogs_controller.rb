@@ -2,20 +2,16 @@
 
 module Decidim
   module Blogs
-    # Exposes the meeting resource so users can view them
+    # Exposes the blog resource so users can view them
     class BlogsController < Decidim::Blogs::ApplicationController
-      #include FilterResource
+      # include FilterResource
       # include Paginable
 
       helper_method :blogs, :blog
 
-      def index
+      def index; end
 
-      end
-
-      def show
-        @blog = Blog.find_by(feature: current_feature)
-      end
+      def show; end
 
       private
 
@@ -26,7 +22,6 @@ module Decidim
       def blogs
         @blogs ||= Blog.where(feature: current_feature)
       end
-
     end
   end
 end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "kaminari"
+require "jquery-tmpl-rails"
 
 module Decidim
   module Blogs
@@ -14,13 +15,6 @@ module Decidim
         resources :blogs, only: [:index, :show]
         root to: "blogs#index"
       end
-
-      initializer "decidim_blogs.inject_abilities_to_user" do |_app|
-        Decidim.configure do |config|
-          config.abilities += ["Decidim::Blogs::Abilities::CurrentUserAbility"]
-        end
-      end
-
     end
   end
 end

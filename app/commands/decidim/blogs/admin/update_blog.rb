@@ -15,7 +15,7 @@ module Decidim
           @blog = blog
         end
 
-        # Updates the meeting if valid.
+        # Updates the blog if valid.
         #
         # Broadcasts :ok if successful, :invalid otherwise.
         def call
@@ -35,10 +35,9 @@ module Decidim
         def update_blog!
           blog.update_attributes!(
             title: form.title,
-            body: form.body,
-            )
+            body: form.body
+          )
         end
-
       end
     end
   end

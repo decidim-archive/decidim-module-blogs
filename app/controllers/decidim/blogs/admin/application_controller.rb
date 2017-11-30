@@ -16,7 +16,6 @@ module Decidim
         def blog
           @blog ||= blogs.find(params[:id])
         end
-
       end
     end
   end

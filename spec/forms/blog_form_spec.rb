@@ -30,14 +30,11 @@ module Decidim
           }
         end
 
-        let(:commentable) { true }
-
         let(:attributes) do
           {
             "blog" => {
               "title" => title,
               "body" => body,
-              "commentable" => commentable
             }
           }
         end
