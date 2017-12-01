@@ -9,7 +9,7 @@ Decidim.register_feature(:blogs) do |feature|
   feature.icon = "decidim/blogs/icon.svg"
 
   feature.on(:before_destroy) do |instance|
-    raise StandardError, "Can't remove this feature" if Decidim::Blogs::Blog.where(feature: instance).any?
+    raise StandardError, "Can't remove this feature" if Decidim::Blogs::Post.where(feature: instance).any?
   end
 
   feature.settings(:global) do |settings|
@@ -23,6 +23,6 @@ Decidim.register_feature(:blogs) do |feature|
   end
 
   feature.register_resource do |resource|
-    resource.model_class_name = "Decidim::Blogs::Blog"
+    resource.model_class_name = "Decidim::Blogs::Post"
   end
 end

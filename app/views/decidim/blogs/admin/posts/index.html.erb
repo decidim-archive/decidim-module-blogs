@@ -1,0 +1,47 @@
+<div class="card">
+  <div class="card-divider">
+    <h2 class="card-title">
+      <%= t(".title") %>
+      <%= link_to t("actions.new", scope: "decidim.blogs", name: t("models.post.name", scope: "decidim.blogs.admin")), new_post_path, class: 'button tiny button--title' if can? :manage, current_feature %>
+    </h2>
+  </div>
+
+  <div class="card-section">
+    <div class="table-scroll">
+      <table class="table-list">
+        <thead>
+          <tr>
+            <th><%= t("models.post.fields.title", scope: "decidim.blogs") %></th>
+            <th><%= t("models.post.fields.body", scope: "decidim.blogs") %></th>
+
+            <th class="actions"><%= t("actions.title", scope: "decidim.blogs") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% posts.each do |post| %>
+
+            <tr data-id="<%= post.id %>">
+              <td>
+                <%= translated_attribute(post.title) %><br />
+              </td>
+              <td>
+                <%= truncate(html_escape(translated_attribute(post.body).html_safe), length: 100).html_safe %><br />
+              </td>
+
+              <td class="table-list__actions">
+                <% if can? :update, current_feature %>
+                  <%= icon_link_to "pencil", edit_post_path(post), t("actions.edit", scope: "decidim.blogs"), class: "action-icon--edit" %>
+                <% end %>
+
+                <% if can? :destroy, current_feature %>
+                  <%= icon_link_to "circle-x", post_path(post), t("actions.destroy", scope: "decidim.blogs"), method: :delete, class: "action-icon--remove", data: { confirm: t("actions.confirm_destroy", scope: "decidim.blogs") } %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate posts, theme: "decidim" %>
+    </div>
+  </div>
+<div>

@@ -5,14 +5,14 @@ module Decidim
     module Admin
       # This command is executed when the user changes a Blog from the admin
       # panel.
-      class UpdateBlog < Rectify::Command
+      class UpdatePost < Rectify::Command
         # Initializes a UpdateBlog Command.
         #
         # form - The form from which to get the data.
         # blog - The current instance of the page to be updated.
-        def initialize(form, blog)
+        def initialize(form, post)
           @form = form
-          @blog = blog
+          @post = post
         end
 
         # Updates the blog if valid.
@@ -22,18 +22,18 @@ module Decidim
           return broadcast(:invalid) if form.invalid?
 
           transaction do
-            update_blog!
+            update_post!
           end
 
-          broadcast(:ok, blog)
+          broadcast(:ok, post)
         end
 
         private
 
-        attr_reader :form, :blog
+        attr_reader :form, :post
 
-        def update_blog!
-          blog.update_attributes!(
+        def update_post!
+          post.update_attributes!(
             title: form.title,
             body: form.body
           )

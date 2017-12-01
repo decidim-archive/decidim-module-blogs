@@ -10,38 +10,36 @@ en:
         preview: Preview
         title: Actions
       admin:
-        blogs:
+        posts:
           create:
             invalid: There's been a problem creating this blog
-            success: Blog successfully created
+            success: Post successfully created
           destroy:
-            success: Blog successfully deleted
+            success: Post successfully deleted
           edit:
             save: Update
           index:
-            title: Blogs
+            title: Posts
           new:
             create: Create
-            title: Create blog
+            title: Create post
           update:
-            invalid: There's been errors when saving the blog.
-            success: Blog saved successfully
+            invalid: There's been errors when saving the post.
+            success: Post saved successfully
         models:
-          blog:
-            name: Blog
+          post:
+            name: Post
           components:
             body: Body
       models:
-        blog:
+        post:
           fields:
             body: Body
             title: title
       read_more: Read more
     features:
       blogs:
-        actions:
-          join: Join
-        name: Blogs
+        name: Blog
         settings:
           global:
             announcement: Announcement
@@ -49,7 +47,3 @@ en:
           step:
             announcement: Announcement
             comments_blocked: Comments Blocked
-  pages:
-    home:
-      statistics:
-        blogs_count: Blogs

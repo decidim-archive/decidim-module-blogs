@@ -10,8 +10,8 @@ module Decidim
       paths["db/migrate"] = nil
 
       routes do
-        resources :blogs
-        root to: "blogs#index"
+        resources :posts
+        root to: "posts#index"
       end
 
       def load_seed

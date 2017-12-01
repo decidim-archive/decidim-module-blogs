@@ -3,7 +3,7 @@
 module Decidim
   module Blogs
     # Custom helpers used in blogs views
-    module BlogsHelper
+    module PostsHelper
       include Decidim::ApplicationHelper
       include Decidim::TranslationsHelper
       include Decidim::ResourceHelper
@@ -14,9 +14,9 @@ module Decidim
       # max_length - a number to limit the length of the body
       #
       # Returns the blog's body truncated.
-      def blog_description(blog, max_length = 120)
-        link = resource_locator(blog).path
-        body = translated_attribute(blog.body)
+      def post_description(post, max_length = 120)
+        link = post_path(post)
+        body = translated_attribute(post.body)
         tail = "... #{link_to(t("read_more", scope: "decidim.blogs"), link)}".html_safe
         CGI.unescapeHTML html_truncate(body, max_length: max_length, tail: tail)
       end

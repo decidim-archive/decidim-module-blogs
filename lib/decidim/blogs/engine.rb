@@ -12,8 +12,8 @@ module Decidim
       isolate_namespace Decidim::Blogs
 
       routes do
-        resources :blogs, only: [:index, :show]
-        root to: "blogs#index"
+        resources :posts, only: [:index, :show]
+        root to: "posts#index"
       end
     end
   end

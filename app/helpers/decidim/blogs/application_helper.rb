@@ -5,8 +5,8 @@ module Decidim
     # Custom helpers, scoped to the blogs engine.
     #
     module ApplicationHelper
-      # include PaginateHelper
-      include Decidim::Blogs::BlogsHelper
+      include PaginateHelper
+      include Decidim::Blogs::PostsHelper
       include Decidim::Comments::CommentsHelper
     end
   end

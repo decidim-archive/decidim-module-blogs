@@ -7,14 +7,14 @@ module Decidim
       # Decidim's admin base controller in order to inherit the layout and other
       # convenience methods relevant to a this component.
       class ApplicationController < Decidim::Admin::Features::BaseController
-        helper_method :blogs, :blog
+        helper_method :posts, :post
 
-        def blogs
-          @blogs ||= Blog.where(feature: current_feature).page(params[:page]).per(15)
+        def posts
+          @posts ||= Post.where(feature: current_feature).page(params[:page]).per(15)
         end
 
-        def blog
-          @blog ||= blogs.find(params[:id])
+        def post
+          @post ||= posts.find(params[:id])
         end
       end
     end

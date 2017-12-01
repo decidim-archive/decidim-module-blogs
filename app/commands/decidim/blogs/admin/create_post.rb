@@ -3,30 +3,30 @@
 module Decidim
   module Blogs
     module Admin
-      # This command is executed when the user creates a Blog from the admin
+      # This command is executed when the user creates a Post from the admin
       # panel.
-      class CreateBlog < Rectify::Command
+      class CreatePost < Rectify::Command
         def initialize(form)
           @form = form
         end
 
-        # Creates the blog if valid.
+        # Creates the post if valid.
         #
         # Broadcasts :ok if successful, :invalid otherwise.
         def call
           return broadcast(:invalid) if @form.invalid?
 
           transaction do
-            create_blog!
+            create_post!
           end
 
-          broadcast(:ok, @blog)
+          broadcast(:ok, @post)
         end
 
         private
 
-        def create_blog!
-          @blog = Blog.create!(
+        def create_post!
+          @post = Post.create!(
             title: @form.title,
             body: @form.body,
             feature: @form.current_feature
