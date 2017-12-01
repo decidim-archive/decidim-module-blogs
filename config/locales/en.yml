@@ -7,9 +7,13 @@ en:
         destroy: Delete
         edit: Edit
         new: New
-        preview: Preview
         title: Actions
       admin:
+        models:
+          components:
+            body: Body
+          post:
+            name: Post
         posts:
           create:
             invalid: There's been a problem creating this post
@@ -26,11 +30,6 @@ en:
           update:
             invalid: There's been errors when saving the post.
             success: Post saved successfully
-        models:
-          post:
-            name: Post
-          components:
-            body: Body
       models:
         post:
           fields:
