@@ -5,28 +5,28 @@ require "spec_helper"
 module Decidim
   module Blogs
     module Admin
-      describe UpdateBlog do
+      describe UpdatePost do
         let(:current_organization) { create(:organization) }
         let(:participatory_process) { create(:participatory_process, organization: current_organization) }
-        let(:feature) { create(:feature, manifest_name: "blogs", participatory_space: participatory_process) }
-        let(:blog) { create(:blog, feature: feature) }
+        let(:feature) { create(:feature, manifest_name: "posts", participatory_space: participatory_process) }
+        let(:post) { create(:post, feature: feature) }
         let(:form_params) do
           {
-            "title" => blog.title,
-            "body" => blog.body,
+            "title" => post.title,
+            "body" => post.body,
             "page" => {
               "commentable" => false
             }
           }
         end
         let(:form) do
-          BlogForm.from_params(
+          PostForm.from_params(
             form_params
           ).with_context(
             current_organization: current_organization
           )
         end
-        let(:command) { described_class.new(form, blog) }
+        let(:command) { described_class.new(form, post) }
 
         describe "when the form is invalid" do
           before do
@@ -37,8 +37,8 @@ module Decidim
             expect { command.call }.to broadcast(:invalid)
           end
 
-          it "doesn't update the blog" do
-            expect(blog).not_to receive(:update_attributes!)
+          it "doesn't update the post" do
+            expect(post).not_to receive(:update_attributes!)
             command.call
           end
         end
@@ -48,8 +48,8 @@ module Decidim
             expect { command.call }.to broadcast(:ok)
           end
 
-          it "creates a new blog with the same name as the feature" do
-            expect(blog).to receive(:update_attributes!)
+          it "creates a new post with the same name as the feature" do
+            expect(post).to receive(:update_attributes!)
             command.call
           end
         end

@@ -2,14 +2,14 @@
 
 require "spec_helper"
 
-describe "Edit a blog", type: :feature do
+describe "Edit a post", type: :feature do
   include_context "when managing a feature as an admin"
-  let(:feature) { create(:feature, manifest_name: "blogs", participatory_space: participatory_process) }
-  let(:manifest_name) { "blogs" }
+  let(:feature) { create(:feature, manifest_name: "posts", participatory_space: participatory_process) }
+  let(:manifest_name) { "posts" }
 
-  describe "admin blog" do
+  describe "admin post" do
     before do
-      create(:blog, feature: feature, title: title, body: body)
+      create(:post, feature: feature, title: title, body: body)
       visit_feature_admin
     end
 
@@ -29,29 +29,29 @@ describe "Edit a blog", type: :feature do
       }
     end
 
-    it "updates the blog" do
+    it "updates the post" do
       new_body = {
         en: "<p>New body</p>",
         ca: "<p>Nou cos</p>",
         es: "<p>Nuevo cuerpo</p>"
       }
 
-      within "form.edit_blog" do
-        fill_in_i18n_editor(:blog_body, "#blog-body-tabs", new_body)
+      within "form.edit_post" do
+        fill_in_i18n_editor(:post_body, "#post-body-tabs", new_body)
         find("*[type=submit]").click
       end
 
-      expect(blog).to have_admin_callout("successfully")
+      expect(post).to have_admin_callout("successfully")
 
       visit_feature
 
-      expect(blog).to have_content("New body")
+      expect(post).to have_content("New body")
     end
   end
 
   describe "announcements" do
     before do
-      create(:blog, feature: feature, title: title, body: body)
+      create(:post, feature: feature, title: title, body: body)
       visit_feature_admin
     end
     it_behaves_like "manage announcements"

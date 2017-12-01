@@ -4,15 +4,15 @@ require "spec_helper"
 
 module Decidim
   module Blogs
-    describe CreateBlog do
+    describe CreatePost do
       describe "call" do
-        let(:feature) { create(:feature, manifest_name: "blogs") }
+        let(:feature) { create(:feature, manifest_name: "posts") }
         let(:command) { described_class.new(feature) }
 
-        describe "when the blog is not saved" do
+        describe "when the post is not saved" do
           before do
             # rubocop:disable RSpec/AnyInstance
-            expect_any_instance_of(Blog).to receive(:save).and_return(false)
+            expect_any_instance_of(Post).to receive(:save).and_return(false)
             # rubocop:enable RSpec/AnyInstance
           end
 
@@ -20,24 +20,24 @@ module Decidim
             expect { command.call }.to broadcast(:invalid)
           end
 
-          it "doesn't create a blog" do
+          it "doesn't create a post" do
             expect do
               command.call
-            end.not_to change { Blog.count }
+            end.not_to change { Post.count }
           end
         end
 
-        describe "when the blog is saved" do
+        describe "when the post is saved" do
           it "broadcasts ok" do
             expect { command.call }.to broadcast(:ok)
           end
 
-          it "creates a new blog with the same name as the feature" do
-            expect(Blog).to receive(:new).with(feature: feature).and_call_original
+          it "creates a new post with the same name as the feature" do
+            expect(Post).to receive(:new).with(feature: feature).and_call_original
 
             expect do
               command.call
-            end.to change { Blog.count }.by(1)
+            end.to change { Post.count }.by(1)
           end
         end
       end

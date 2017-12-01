@@ -2,9 +2,9 @@
 
 require "spec_helper"
 
-describe "Show a blog", type: :feature do
+describe "Show a post", type: :feature do
   include_context "with a feature"
-  let(:manifest_name) { "blogs" }
+  let(:manifest_name) { "posts" }
 
   let(:title) do
     {
@@ -22,15 +22,15 @@ describe "Show a blog", type: :feature do
     }
   end
 
-  let!(:blog_feature) { create(:blog, feature: feature, title: title, body: body) }
+  let!(:post_feature) { create(:post, feature: feature, title: title, body: body) }
 
-  describe "blog show" do
+  describe "post show" do
     before do
       visit_feature
     end
 
-    it "renders the content of the blog" do
-      expect(blog).to have_content("Content")
+    it "renders the content of the post" do
+      expect(post).to have_content("Content")
     end
   end
 end

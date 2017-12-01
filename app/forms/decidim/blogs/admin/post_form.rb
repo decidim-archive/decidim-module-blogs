@@ -12,7 +12,6 @@ module Decidim
 
         validates :title, translatable_presence: true
         validates :body, translatable_presence: true
-
       end
     end
   end

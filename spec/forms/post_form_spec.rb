@@ -5,7 +5,7 @@ require "spec_helper"
 module Decidim
   module Blogs
     module Admin
-      describe BlogForm do
+      describe PostForm do
         subject do
           described_class.from_params(attributes).with_context(
             current_organization: current_organization
@@ -32,9 +32,9 @@ module Decidim
 
         let(:attributes) do
           {
-            "blog" => {
+            "post" => {
               "title" => title,
-              "body" => body,
+              "body" => body
             }
           }
         end
