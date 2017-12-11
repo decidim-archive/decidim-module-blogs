@@ -33,7 +33,9 @@ ca:
       models:
         post:
           fields:
+            author: Autor
             body: Contingut
+            created_at: Creat el
             title: Títol
       read_more: Llegeix més
     features:

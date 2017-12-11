@@ -11,6 +11,7 @@ module Decidim
 
       feature_manifest_name "blogs"
 
+      belongs_to :author, foreign_key: "decidim_author_id", class_name: "Decidim::User"
       validates :title, presence: true
 
       default_scope { order(arel_table[:created_at].desc) }

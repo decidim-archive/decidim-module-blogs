@@ -2,18 +2,18 @@
 
 module Decidim
   module Blogs
-    # Custom helpers used in blogs views
+    # Custom helpers used in posts views
     module PostsHelper
       include Decidim::ApplicationHelper
       include Decidim::TranslationsHelper
       include Decidim::ResourceHelper
 
-      # Public: truncates the blog body
+      # Public: truncates the post body
       #
-      # blog - a Decidim::Blog instance
+      # post - a Decidim::Blog instance
       # max_length - a number to limit the length of the body
       #
-      # Returns the blog's body truncated.
+      # Returns the post's body truncated.
       def post_description(post, max_length = 120)
         link = post_path(post)
         body = translated_attribute(post.body)

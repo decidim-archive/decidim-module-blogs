@@ -29,7 +29,8 @@ module Decidim
           @post = Post.create!(
             title: @form.title,
             body: @form.body,
-            feature: @form.current_feature
+            feature: @form.current_feature,
+            decidim_author_id: current_user.id
           )
         end
       end

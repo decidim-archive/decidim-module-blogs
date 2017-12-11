@@ -33,7 +33,9 @@ en:
       models:
         post:
           fields:
+            author: Author
             body: Body
+            created_at: Created at
             title: title
       read_more: Read more
     features:
