@@ -4,7 +4,7 @@ module Decidim
   module Blogs
     # Exposes the blog resource so users can view them
     class PostsController < Decidim::Blogs::ApplicationController
-      helper_method :posts, :post
+      helper_method :posts, :post, :paginate_posts
 
       def index; end
 
@@ -12,12 +12,16 @@ module Decidim
 
       private
 
+      def paginate_posts
+        @paginate_posts ||= posts.page(params[:page]).per(4)
+      end
+
       def post
         @post ||= posts.find(params[:id])
       end
 
       def posts
-        @posts ||= Post.where(feature: current_feature).page(params[:page]).per(9)
+        @posts ||= Post.where(feature: current_feature)
       end
     end
   end
