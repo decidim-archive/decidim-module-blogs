@@ -14,7 +14,7 @@ module Decidim
       belongs_to :author, foreign_key: "decidim_author_id", class_name: "Decidim::User"
       validates :title, presence: true
 
-      default_scope { order(arel_table[:created_at].desc) }
+      scope :created_at_desc, -> { order(arel_table[:created_at].desc) }
 
       # Public: Overrides the `commentable?` Commentable concern method.
       def commentable?

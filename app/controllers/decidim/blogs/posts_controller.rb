@@ -13,7 +13,7 @@ module Decidim
       private
 
       def paginate_posts
-        @paginate_posts ||= posts.page(params[:page]).per(4)
+        @paginate_posts ||= posts.created_at_desc.page(params[:page]).per(4)
       end
 
       def post
@@ -25,8 +25,7 @@ module Decidim
       end
 
       def posts_most_commented
-        @posts_most_commented ||= posts.includes(:comments).order("comments.size ASC")
-        raise
+        # @posts_most_commented ||= posts.includes(:comments).order("comments.size ASC")
       end
     end
   end
