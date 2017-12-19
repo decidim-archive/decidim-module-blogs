@@ -9,6 +9,11 @@ ca:
         new: Nou
         title: Accions
       admin:
+        models:
+          components:
+            body: Contingut
+          post:
+            name: Post
         posts:
           create:
             invalid: Hi ha hagut algun problema creant el post
@@ -25,11 +30,6 @@ ca:
           update:
             invalid: Hi ha hagut algun error al actualitzar el post
             success: Post guardat correctament
-        models:
-          post:
-            name: Post
-          components:
-            body: Contingut
       models:
         post:
           fields:

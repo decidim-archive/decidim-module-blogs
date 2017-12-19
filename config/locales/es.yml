@@ -9,6 +9,11 @@ es:
         new: Nuevo
         title: Acciones
       admin:
+        models:
+          components:
+            body: Contenido
+          post:
+            name: Post
         posts:
           create:
             invalid: Ha habido algun problema creando el post
@@ -25,11 +30,6 @@ es:
           update:
             invalid: Ha habido algun problema actualizando el post
             success: Post guardado correctamente
-        models:
-          post:
-            name: Post
-          components:
-            body: Contenido
       models:
         post:
           fields:

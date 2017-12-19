@@ -4,7 +4,7 @@ module Decidim
   module Blogs
     # Exposes the blog resource so users can view them
     class PostsController < Decidim::Blogs::ApplicationController
-      helper_method :posts, :post, :paginate_posts
+      helper_method :posts, :post, :paginate_posts, :posts_most_commented
 
       def index; end
 
@@ -22,6 +22,11 @@ module Decidim
 
       def posts
         @posts ||= Post.where(feature: current_feature)
+      end
+
+      def posts_most_commented
+        @posts_most_commented ||= posts.includes(:comments).order("comments.size ASC")
+        raise
       end
     end
   end

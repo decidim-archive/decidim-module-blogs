@@ -1,10 +1,11 @@
 <%= render partial: "decidim/shared/feature_announcement" %>
 
 <div class="row">
-  <div id="blogs" class="columns small-12 medium-8">
+  <div id="blogs" class="columns small-12 medium-9">
     <%= render partial: "posts" %>
   </div>
-  <div id="most-commented" class="columns small-12 medium-4">
+  <div id="most-commented" class="columns small-12 medium-3">
     Most commented
+    <% posts_most_commented %>
   </div>
 </div>
