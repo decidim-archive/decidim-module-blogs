@@ -8,7 +8,7 @@
         <%= post.author.name %>
       </span>
     <% end %>
-    <%= l post.created_at, format: "%d/%m/%Y" %>
+    <%= render partial: "datetime", locals: { post: post } %>
   </div>
 </div>
 <% if post.commentable? %>

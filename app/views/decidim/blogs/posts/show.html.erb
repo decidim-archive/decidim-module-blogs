@@ -12,11 +12,14 @@
     <%= render partial: "author", locals: { post: post } %>
   </div>
 </div>
-<div class="row">
-  <div class="columns small-12">
-    <div class="section">
-      <p><%= sanitize translated_attribute post.body %></p>
-    </div>
+
+
+<div class="row small-12">
+  <div class="columns small-12 medium-9">
+    <p><%= sanitize translated_attribute post.body %></p>
+  </div>
+  <div id="most-commented" class="columns small-12 medium-3">
+    <%= render partial: "sidebar_blog", locals: {posts: posts_most_commented} %>
   </div>
 </div>
 

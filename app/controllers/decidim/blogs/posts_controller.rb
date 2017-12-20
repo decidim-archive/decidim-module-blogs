@@ -25,7 +25,9 @@ module Decidim
       end
 
       def posts_most_commented
-        # @posts_most_commented ||= posts.includes(:comments).order("comments.size ASC")
+        @posts_most_commented ||= posts.joins(:comments).group(:id)
+                                       .select("count(decidim_comments_comments.id) as counter")
+                                       .select("decidim_blogs_posts.*").order("counter DESC").created_at_desc.limit(7)
       end
     end
   end
