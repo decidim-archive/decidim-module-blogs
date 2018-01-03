@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "Show a post", type: :feature do
   include_context "with a feature"
-  let(:manifest_name) { "posts" }
+  let(:manifest_name) { "blogs" }
 
   let(:title) do
     {

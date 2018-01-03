@@ -4,8 +4,8 @@ require "spec_helper"
 
 describe "Edit a post", type: :feature do
   include_context "when managing a feature as an admin"
-  let(:feature) { create(:feature, manifest_name: "posts", participatory_space: participatory_process) }
-  let(:manifest_name) { "posts" }
+  let(:feature) { create(:feature, manifest_name: "blogs", participatory_space: participatory_process) }
+  let(:manifest_name) { "blogs" }
 
   describe "admin post" do
     before do
