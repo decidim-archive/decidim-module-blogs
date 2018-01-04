@@ -7,14 +7,71 @@ module Decidim
     module Blogs
       module Admin
         describe CreatePost do
+          subject { described_class.new(form) }
+
+          let(:organization) { create :organization }
+          let(:participatory_process) { create :participatory_process, organization: organization }
+          let(:current_feature) { create :feature, participatory_space: participatory_process, manifest_name: "blogs" }
+          let(:current_user) { create :user, organization: organization }
+          let(:name) { "Planned" }
+          let(:body) { "description" }
+
+          let(:invalid) { false }
+          let(:form) do
+            double(
+              invalid?: invalid,
+              title: { en: name },
+              body: { en: body },
+              current_feature: current_feature.id,
+              decidim_author_id: current_user.id
+            )
+          end
+
+          context "when the form is not valid" do
+            let(:invalid) { true }
+
+            it "is not valid" do
+              expect { subject.call }.to broadcast(:invalid)
+            end
+          end
+
+          context "when everything is ok" do
+            let(:post) { Post.last }
+
+            it "creates the post" do
+              expect { subject.call }.to change { Post.count }.by(1)
+            end
+
+            # it "sets the title" do
+            #   subject.call
+            #   expect(translated(post.title)).to eq title
+            # end
+            #
+            # it "sets the body" do
+            #   subject.call
+            #   expect(translated(post.body)).to eq body
+            # end
+            #
+            it "sets the author" do
+              subject.call
+              expect(post.author).to eq current_userd
+            end
+            #
+            # it "sets the feature" do
+            #   subject.call
+            #   expect(post.current_feature).to eq current_feature.id
+            # end
+
+          end
+
           # describe "call" do
           #   let(:feature) { create(:feature, manifest_name: "blogs") }
           #   let(:command) { described_class.new(feature) }
           #
           #   describe "when the post is not saved" do
-          #     # before do
-          #     #   expect_any_instance_of(Decidim::Module::Blogs::Post).to receive(:save).and_return(false)
-          #     # end
+          #     before do
+          #       expect_any_instance_of(Post).to receive(:save).and_return(false)
+          #     end
           #
           #     it "broadcasts invalid" do
           #       expect { command.call }.to broadcast(:invalid)
