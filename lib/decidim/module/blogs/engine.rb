@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-require "rails"
-require "active_support/all"
-
-require "decidim/core"
-
 require "kaminari"
 require "jquery-tmpl-rails"
 
