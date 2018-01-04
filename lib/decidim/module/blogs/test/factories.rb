@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
+require "decidim/faker/localized"
 require "decidim/core/test/factories"
 require "decidim/participatory_processes/test/factories"
 
 FactoryBot.define do
-  factory :blog_feature, parent: :feature do
+  factory :post_feature, parent: :feature do
     name { Decidim::Features::Namer.new(participatory_space.organization.available_locales, :blogs).i18n_name }
     manifest_name :blogs
     participatory_space { create(:participatory_process, :with_steps, organization: organization) }
