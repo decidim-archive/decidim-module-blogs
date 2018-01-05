@@ -7,51 +7,54 @@ module Decidim
     module Blogs
       module Admin
         describe UpdatePost do
-          let(:current_organization) { create(:organization) }
-          let(:participatory_process) { create(:participatory_process, organization: current_organization) }
-          let(:feature) { create(:feature, manifest_name: "blogs", participatory_space: participatory_process) }
-          let(:post) { create(:post, feature: feature) }
-          let(:form_params) do
-            {
-              "title" => post.title,
-              "body" => post.body,
-              "page" => {
-                "commentable" => false
-              }
-            }
-          end
+          subject { described_class.new(form, post) }
+
+          let(:organization) { create(:organization) }
+          let(:participatory_process) { create :participatory_process, organization: organization }
+          let(:current_feature) { create :feature, participatory_space: participatory_process, manifest_name: "blogs" }
+          let(:current_user) { create :user, organization: organization }
+          let(:title) { "Post title" }
+          let(:body) { "Lorem Ipsum dolor sit amet" }
+          let(:post) { create(:post, feature: current_feature, author: current_user) }
+          let(:invalid) { false }
           let(:form) do
-            PostForm.from_params(
-              form_params
-            ).with_context(
-              current_organization: current_organization
+            double(
+              invalid?: invalid,
+              title: { en: title },
+              body: { en: body },
+              current_feature: current_feature,
+              decidim_author_id: current_user.id
             )
           end
-          let(:command) { described_class.new(form, post) }
 
-          describe "when the form is invalid" do
-            before do
-              expect(form).to receive(:invalid?).and_return(true)
-            end
+          context "when the form is not valid" do
+            let(:invalid) { true }
 
-            it "broadcasts invalid" do
-              expect { command.call }.to broadcast(:invalid)
+            it "is not valid" do
+              expect { subject.call }.to broadcast(:invalid)
             end
 
             it "doesn't update the post" do
               expect(post).not_to receive(:update_attributes!)
-              command.call
+              subject.call
             end
           end
 
-          describe "when the form is valid" do
-            it "broadcasts ok" do
-              expect { command.call }.to broadcast(:ok)
+          context "when everything is ok" do
+            let(:title) { "Post title updated" }
+            let(:body) { "Lorem Ipsum dolor sit amet updated" }
+
+            it "updates the title" do
+              subject.call
+              expect(translated(post.title)).to eq title
+            end
+            it "updates the body" do
+              subject.call
+              expect(translated(post.body)).to eq body
             end
 
-            it "creates a new post with the same name as the feature" do
-              expect(post).to receive(:update_attributes!)
-              command.call
+            it "broadcasts ok" do
+              expect { subject.call }.to broadcast(:ok)
             end
           end
         end

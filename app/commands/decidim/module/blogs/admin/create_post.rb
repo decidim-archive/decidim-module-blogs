@@ -7,8 +7,9 @@ module Decidim
         # This command is executed when the user creates a Post from the admin
         # panel.
         class CreatePost < Rectify::Command
-          def initialize(form)
+          def initialize(form, current_user)
             @form = form
+            @current_user = current_user
           end
 
           # Creates the post if valid.
@@ -31,7 +32,7 @@ module Decidim
               title: @form.title,
               body: @form.body,
               feature: @form.current_feature,
-              decidim_author_id: current_user.id
+              decidim_author_id: @current_user.id
             )
           end
         end

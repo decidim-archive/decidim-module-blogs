@@ -12,6 +12,10 @@ Decidim.register_feature(:blogs) do |feature|
     raise StandardError, "Can't remove this feature" if Decidim::Module::Blogs::Post.where(feature: instance).any?
   end
 
+  feature.register_stat :posts_count, primary: true, priority: Decidim::StatsRegistry::MEDIUM_PRIORITY do |features, _start_at, _end_at|
+    Decidim::Module::Blogs::Post.where(feature: features).count
+  end
+
   feature.settings(:global) do |settings|
     settings.attribute :announcement, type: :text, translated: true, editor: true
     settings.attribute :comments_enabled, type: :boolean, default: true
@@ -25,7 +29,6 @@ Decidim.register_feature(:blogs) do |feature|
   feature.register_resource do |resource|
     resource.model_class_name = "Decidim::Module::Blogs::Post"
   end
-
 
   feature.seeds do |participatory_space|
     step_settings = if participatory_space.allows_steps?
@@ -45,7 +48,7 @@ Decidim.register_feature(:blogs) do |feature|
       step_settings: step_settings
     )
 
-    5.times do |n|
+    5.times do
       author = Decidim::User.where(organization: feature.organization).all.first
 
       post = Decidim::Module::Blogs::Post.create!(
@@ -54,11 +57,10 @@ Decidim.register_feature(:blogs) do |feature|
         body: Decidim::Faker::Localized.wrapped("<p>", "</p>") do
           Decidim::Faker::Localized.paragraph(20)
         end,
-        author: author,
+        author: author
       )
 
       Decidim::Comments::Seed.comments_for(post)
     end
   end
-
 end

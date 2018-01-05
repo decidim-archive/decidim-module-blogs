@@ -25,7 +25,7 @@ module Decidim
           @posts ||= Post.where(feature: current_feature)
         end
 
-        #PROVISIONAL if we implement counter cache
+        # PROVISIONAL if we implement counter cache
         def posts_most_commented
           @posts_most_commented ||= posts.joins(:comments).group(:id)
                                          .select("count(decidim_comments_comments.id) as counter")
