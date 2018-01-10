@@ -2,6 +2,5 @@
 
 require "decidim/core/test/factories"
 require "decidim/participatory_processes/test/factories"
-require "decidim/assemblies/test/factories"
 
-require "decidim/blogs/test/factories"
+require "decidim/module/blogs/test/factories"
