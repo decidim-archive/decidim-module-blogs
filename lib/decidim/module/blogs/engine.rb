@@ -3,6 +3,8 @@
 require "kaminari"
 require "jquery-tmpl-rails"
 
+require "decidim/core"
+
 module Decidim
   module Module
     module Blogs
