@@ -36,6 +36,10 @@ module Decidim
         def comments_have_votes?
           true
         end
+
+        def official?
+          author.nil?
+        end
       end
     end
   end
