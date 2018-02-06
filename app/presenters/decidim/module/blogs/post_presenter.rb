@@ -8,11 +8,7 @@ module Decidim
     #
       class PostPresenter < SimpleDelegator
         def author
-          @author ||= if official?
-                        Decidim::Module::Blogs::OfficialAuthorPresenter.new
-                      else
-                        Decidim::UserPresenter.new(super)
-                      end
+          @author ||=  Decidim::UserPresenter.new(super)
         end
       end
     end
