@@ -5,7 +5,7 @@ require "spec_helper"
 module Decidim::Module::Blogs
   describe Post do
     subject { post }
-    
+
     let(:current_organization) { create(:organization) }
     let(:current_user) { create(:user, organization: current_organization) }
     let(:participatory_process) { create :participatory_process, organization: current_organization }

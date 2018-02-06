@@ -3,12 +3,12 @@
 module Decidim
   module Module
     module Blogs
-    #
-    # Decorator for posts
-    #
+      #
+      # Decorator for posts
+      #
       class PostPresenter < SimpleDelegator
         def author
-          @author ||=  Decidim::UserPresenter.new(super)
+          @author ||= Decidim::UserPresenter.new(super)
         end
       end
     end
