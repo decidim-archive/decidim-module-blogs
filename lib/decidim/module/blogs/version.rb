@@ -5,7 +5,7 @@ module Decidim
   module Module
     module Blogs
       def self.version
-        "0.9.0.pre"
+        "0.10.0.pre"
       end
     end
   end
