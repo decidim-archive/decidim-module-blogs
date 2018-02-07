@@ -21,9 +21,8 @@ jobs:
           - v1-dependencies-
 
       - run:
-          name: install dependencies
-          command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+          name: Install ruby dependencies
+          command: bundle install
 
       - save_cache:
           paths:
