@@ -65,6 +65,22 @@ module Decidim
             it "broadcasts ok" do
               expect { subject.call }.to broadcast(:ok)
             end
+
+            it "sends a notification to the participatory space followers" do
+              follower = create(:user, organization: organization)
+              create(:follow, followable: participatory_process, user: follower)
+
+              expect(Decidim::EventsManager)
+                .to receive(:publish)
+                .with(
+                  event: "decidim.events.blogs.post_created",
+                  event_class: Decidim::Module::Blogs::CreatePostEvent,
+                  resource: kind_of(Post),
+                  recipient_ids: [follower.id]
+                )
+
+              subject.call
+            end
           end
         end
       end
