@@ -20,6 +20,7 @@ module Decidim
 
             transaction do
               create_post!
+              send_notification
             end
 
             broadcast(:ok, @post)
@@ -33,6 +34,15 @@ module Decidim
               body: @form.body,
               feature: @form.current_feature,
               decidim_author_id: @current_user.id
+            )
+          end
+
+          def send_notification
+            Decidim::EventsManager.publish(
+              event: "decidim.events.blogs.post_created",
+              event_class: Decidim::Module::Blogs::CreatePostEvent,
+              resource: @post,
+              recipient_ids: @post.participatory_space.followers.pluck(:id),
             )
           end
         end
