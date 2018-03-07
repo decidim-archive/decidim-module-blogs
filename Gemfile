@@ -18,6 +18,7 @@ gem "decidim", git: "git@github.com:decidim/decidim.git"
 group :test, :development do
   gem "byebug"
   gem "faker"
+  gem "listen"
 end
 
 group :development do

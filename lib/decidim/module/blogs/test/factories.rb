@@ -15,5 +15,6 @@ FactoryBot.define do
     title { Decidim::Faker::Localized.sentence(3) }
     body { Decidim::Faker::Localized.wrapped("<p>", "</p>") { Decidim::Faker::Localized.sentence(4) } }
     feature { build(:feature, manifest_name: "blogs") }
+    author { build(:user, :confirmed, organization: feature.organization) }
   end
 end
