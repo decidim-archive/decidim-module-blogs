@@ -8,11 +8,11 @@ module Decidim
       class Post < Blogs::ApplicationRecord
         include Decidim::Resourceable
         include Decidim::HasFeature
+        include Decidim::Authorable
         include Decidim::Comments::Commentable
 
         feature_manifest_name "blogs"
 
-        belongs_to :author, foreign_key: "decidim_author_id", class_name: "Decidim::User"
         validates :title, presence: true
 
         scope :created_at_desc, -> { order(arel_table[:created_at].desc) }
@@ -35,6 +35,10 @@ module Decidim
         # Public: Overrides the `comments_have_votes?` Commentable concern method.
         def comments_have_votes?
           true
+        end
+
+        def official?
+          author.nil?
         end
       end
     end

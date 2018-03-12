@@ -5,7 +5,6 @@ require "decidim/features/namer"
 Decidim.register_feature(:blogs) do |feature|
   feature.engine = Decidim::Module::Blogs::Engine
   feature.admin_engine = Decidim::Module::Blogs::AdminEngine
-  ## TODO Change the icon to a blog one.
   feature.icon = "decidim/module/blogs/icon.svg"
 
   feature.on(:before_destroy) do |instance|
